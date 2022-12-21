@@ -17,7 +17,7 @@ class LessonInline(admin.StackedInline):
 
 # Register your models here.
 class CourseAdmin(admin.ModelAdmin):
-    inlines = [LessonInline, QuestionInline, ChoiceInline]
+    inlines = [LessonInline, QuestionInline]
     list_display = ('name', 'pub_date')
     list_filter = ['pub_date']
     search_fields = ['name', 'description']
@@ -25,12 +25,16 @@ class CourseAdmin(admin.ModelAdmin):
 class LessonAdmin(admin.ModelAdmin):
     list_display = ['title']
 
+class QuestionAdmin(admin.ModelAdmin):
+    inlines = [ChoiceInline]
+    list_display = ['question_text']
+
 # I added ChoiceAdmin to see if I could avoid needing to input question id
 class ChoiceAdmin(admin.ModelAdmin):
     fields = ['choice_text', 'is_correct']
 
 # <HINT> Register Question and Choice models here
-admin.site.register(Question)
+admin.site.register(Question, QuestionAdmin)
 # I added ChoiceAdmin
 admin.site.register(Choice, ChoiceAdmin)
 admin.site.register(Course, CourseAdmin)
