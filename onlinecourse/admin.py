@@ -30,14 +30,15 @@ class QuestionAdmin(admin.ModelAdmin):
     list_display = ['question_text']
 
 # I added ChoiceAdmin to see if I could avoid needing to input question id
-class ChoiceAdmin(admin.ModelAdmin):
-    fields = ['choice_text', 'is_correct']
+#class ChoiceAdmin(admin.ModelAdmin) (IF REMOVE REMOVE FROM admin.site.etc)
+#    fields = ['choice_text', 'is_correct']
 
 # <HINT> Register Question and Choice models here
 admin.site.register(Question, QuestionAdmin)
 # I added ChoiceAdmin
-admin.site.register(Choice, ChoiceAdmin)
+admin.site.register(Choice)
 admin.site.register(Course, CourseAdmin)
 admin.site.register(Lesson, LessonAdmin)
 admin.site.register(Instructor)
 admin.site.register(Learner)
+admin.site.register(Submission)
